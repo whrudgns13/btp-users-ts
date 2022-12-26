@@ -1,0 +1,12 @@
+applications:
+  - name: cy-sdk
+    path: .
+    buildpacks:
+      - nodejs_buildpack
+    memory: 256M
+    command: npm run start:prod
+    routes:
+      - route : ts-ui5-cy-sdk.cfapps.us10.hana.ondemand.com
+    services : 
+      - app-xsuaa-security
+      - my-destination

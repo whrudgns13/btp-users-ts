@@ -1,0 +1,8 @@
+applications:
+#frontend ui5 app
+  - name: sapui5-ts
+    path: ./dist
+    memory: 128M
+    buildpack: staticfile_buildpack
+    routes:
+      - route: ts-sapui5app.cfapps.us10.hana.ondemand.com

@@ -1,0 +1,96 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RoleCollectionService = void 0;
+const common_1 = require("@nestjs/common");
+const role_collections_api_1 = require("../../AuthorizationAPI/role-collections-api");
+let RoleCollectionService = class RoleCollectionService {
+    constructor() {
+        this.destination = { destinationName: "apiAccessDestination" };
+    }
+    getRoleCollections(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield role_collections_api_1.RoleCollectionsApi.getRoleCollections({
+                showUsers: true
+            }).execute(this.destination);
+            return res.send(collection);
+        });
+    }
+    changeRoleCollectionDescription(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield role_collections_api_1.RoleCollectionsApi.changeRoleCollectionDescription(req.body.id, req.body.collection).execute(this.destination);
+            return res.send(collection);
+        });
+    }
+    createRoleCollection(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield role_collections_api_1.RoleCollectionsApi.createRoleCollection(req.body).execute(this.destination);
+            return res.send(collection);
+        });
+    }
+    deleteRoleCollectionByName(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield role_collections_api_1.RoleCollectionsApi.deleteRoleCollectionByName(req.body.id).execute(this.destination);
+            return res.send(collection);
+        });
+    }
+    addRolesToRoleCollection(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let body = req.body;
+            const collection = yield role_collections_api_1.RoleCollectionsApi.addRolesToRoleCollection(body.collectionName, body.roleReference).execute(this.destination);
+            return res.send(collection);
+        });
+    }
+    deleteRoleFromRoleCollection(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let body = req.body;
+            const collection = yield role_collections_api_1.RoleCollectionsApi.deleteRoleFromRoleCollection(body.roleCollectionName, body.roleName, body.roleTemplateAppId, body.roleTemplateName).execute(this.destination);
+            return res.send(collection);
+        });
+    }
+};
+__decorate([
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)())
+], RoleCollectionService.prototype, "getRoleCollections", null);
+__decorate([
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)())
+], RoleCollectionService.prototype, "changeRoleCollectionDescription", null);
+__decorate([
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)())
+], RoleCollectionService.prototype, "createRoleCollection", null);
+__decorate([
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)())
+], RoleCollectionService.prototype, "deleteRoleCollectionByName", null);
+__decorate([
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)())
+], RoleCollectionService.prototype, "addRolesToRoleCollection", null);
+__decorate([
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)())
+], RoleCollectionService.prototype, "deleteRoleFromRoleCollection", null);
+RoleCollectionService = __decorate([
+    (0, common_1.Injectable)()
+], RoleCollectionService);
+exports.RoleCollectionService = RoleCollectionService;

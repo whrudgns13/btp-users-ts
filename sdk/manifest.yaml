@@ -1,0 +1,12 @@
+applications:
+  - name: ts-sdk
+    path: .
+    buildpacks:
+      - nodejs_buildpack
+    memory: 256M
+    command: npm run start:prod
+    routes:
+      - route: ts-sapui5sdk.cfapps.us10.hana.ondemand.com
+    services : 
+      - app-xsuaa-security
+      - ts-destination

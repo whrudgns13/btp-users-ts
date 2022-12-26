@@ -1,0 +1,25 @@
+applications:
+  - name: ts-approuter
+    path: .
+    routes:
+      - route: test-approuterts.cfapps.us10.hana.ondemand.com
+    memory: 128M
+    buildpacks:
+      - nodejs_buildpack
+    services: 
+      - app-xsuaa-security
+    env: 
+      SESSION_TIMEOUT: 40
+      destinations: >
+        [
+          {
+            "name" : "server",
+            "url":"https://ts-sapui5sdk.cfapps.us10.hana.ondemand.com",          
+            "forwardAuthToken":true
+          },
+          {
+            "name" : "ui5app",
+            "url":"https://ts-sapui5app.cfapps.us10.hana.ondemand.com"          
+          }
+        ]
+        
